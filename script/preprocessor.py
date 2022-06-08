@@ -1,4 +1,5 @@
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
+import pandas as pd
 
 class Preprocessor:
 
@@ -34,8 +35,15 @@ class Preprocessor:
     def standardize(self, X):
         pass
     
-    def fit_encoder(self, train_categorical):
-        pass
+    def fit_encoder(self, handle_unknown="ignore"):
+        self.encoder = OneHotEncoder(handle_unknown=handle_unknown)
+        self.encoder.fit(self.train_categorics)        
 
-    def encode(self, X):
-        pass
+    def encode(self):
+        encoded_train = self.encoder.transform(self.train_categorics).toarray()
+        encoded_valid = self.encoder.transform(self.valid_categorics).toarray()
+        encoded_test = self.encoder.transform(self.test_categorics).toarray()
+        
+        self.encoded_train = pd.DataFrame(encoded_train)
+        self.encoded_valid = pd.DataFrame(encoded_valid)
+        self.encoded_test = pd.DataFrame(encoded_test)
