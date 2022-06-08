@@ -55,7 +55,7 @@ class dataPreparation:
                 self.y_train = y_train
                 self.y_test = y_test
 
-        # return x_train, x_valid, x_test, y_train, y_valid, y_test
+        return x_train, x_valid, x_test, y_train, y_valid, y_test
 
     def print_split_shape(self, with_valid=False):
         if with_valid:
